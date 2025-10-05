@@ -1,0 +1,30 @@
+ID NOME CPF RAZAO SOCIAL CNPJ STATUS
+
+
+		listaFornecedor.getNome(),
+                            listaFornecedor.getCpf(),
+                            listaFornecedor.getStatus(),
+                            listaFornecedor.getRazaoSocial(),
+                            listaFornecedor.getCnpj(),});
+
+
+
+Funcionario
+Hospede
+Fornecedor
+Servico
+Marca
+VagaEstacionamento
+Quarto
+ProdutoCopa (verificar banco chave estrangeira)
+
+FALTA MODELO
+FALTA VEICULO
+FALTA PRODUTO
+
+
+pstm.setFloat(3, objeto.getMetragemVaga());
+vagaEstacionamento.setMetragemVaga(rst.getFloat("metragem vaga"));
+vagaEstacionamento.setMetragemVaga(rst.getFloat("metragem vaga"));
+pstm.setFloat(3, objeto.getMetragemVaga());
+ordem servico

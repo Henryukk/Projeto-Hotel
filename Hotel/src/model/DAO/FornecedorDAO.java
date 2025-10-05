@@ -1,0 +1,266 @@
+package model.DAO;
+
+import java.util.List;
+import model.Fornecedor;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
+
+    @Override
+    public void Create(Fornecedor objeto) {
+
+        String sqlInstrucao = "Insert into fornecedor("
+                + " nome, "
+                + " fone, "
+                + " fone2, "
+                + " email, "
+                + " cep, "
+                + " logradouro, "
+                + " bairro, "
+                + " cidade, "
+                + " complemento, "
+                + " data_cadastro, "
+                + " cpf, "
+                + " rg, "
+                + " obs, "
+                + " status, "
+                + " razao_social, "
+                + " cnpj, "
+                + " inscricao_estadual, "
+                + " contato) "
+                + " values (?,?,?,?,?,?,?,?,?,str_to_date(?, '%d/%m/%Y'),?,?,?,?,?,?,?,?)";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        try {
+
+            pstm = conexao.prepareStatement(sqlInstrucao);
+
+            pstm.setString(1, objeto.getNome());
+            pstm.setString(2, objeto.getFone1());
+            pstm.setString(3, objeto.getFone2());
+            pstm.setString(4, objeto.getEmail());
+            pstm.setString(5, objeto.getCep());
+            pstm.setString(6, objeto.getLogradouro());
+            pstm.setString(7, objeto.getBairro());
+            pstm.setString(8, objeto.getCidade());
+            pstm.setString(9, objeto.getComplemento());
+            pstm.setString(10, objeto.getDataCadastro());
+            pstm.setString(11, objeto.getCpf());
+            pstm.setString(12, objeto.getRg());
+            pstm.setString(13, objeto.getObs());
+            pstm.setString(14, String.valueOf(objeto.getStatus()));
+            pstm.setString(15, objeto.getRazaoSocial());
+            pstm.setString(16, objeto.getCnpj());
+            pstm.setString(17, objeto.getInscricaoEstadual());
+            pstm.setString(18, objeto.getContato());
+
+            pstm.execute();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
+    }
+
+     public Fornecedor Retrieve(int id) {
+        String sqlInstrucao = "SELECT "
+                + " id, "
+                + " nome, "
+                + " fone, "
+                + " fone2, "
+                + " email, "
+                + " cep, "
+                + " logradouro, "
+                + " bairro, "
+                + " cidade, "
+                + " complemento, "
+                + " DATE_FORMAT(data_cadastro, '%d/%m/%Y') AS data_cadastro, "
+                + " cpf, "
+                + " rg, "
+                + " obs, "
+                + " status, "
+                + " razao_social, "
+                + " cnpj, "
+                + " inscricao_estadual, "
+                + " contato "
+                + " FROM fornecedor WHERE id = ?";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rst = null;
+        Fornecedor fornecedor = new Fornecedor();
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setInt(1, id);
+            rst = pstm.executeQuery();
+
+            while (rst.next()) {
+                fornecedor.setId(rst.getInt("id"));
+                fornecedor.setNome(rst.getString("nome"));
+                fornecedor.setFone1(rst.getString("fone"));
+                fornecedor.setFone2(rst.getString("fone2"));
+                fornecedor.setEmail(rst.getString("email"));
+                fornecedor.setCep(rst.getString("cep"));
+                fornecedor.setLogradouro(rst.getString("logradouro"));
+                fornecedor.setBairro(rst.getString("bairro"));
+                fornecedor.setCidade(rst.getString("cidade"));
+                fornecedor.setComplemento(rst.getString("complemento"));
+                fornecedor.setDataCadastro(rst.getString("data_cadastro"));
+                fornecedor.setCpf(rst.getString("cpf"));
+                fornecedor.setRg(rst.getString("rg"));
+                fornecedor.setObs(rst.getString("obs"));
+                fornecedor.setRazaoSocial(rst.getString("razao_social"));
+                fornecedor.setCnpj(rst.getString("cnpj"));
+                fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));
+                fornecedor.setContato(rst.getString("contato"));
+                fornecedor.setStatus(rst.getString("status").charAt(0));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
+
+        return fornecedor;
+    }
+
+    @Override
+    public List<Fornecedor> Retrieve(String atributo, String valor) {
+
+        String sqlInstrucao = "SELECT "
+                + " id,"
+                + " nome,"
+                + " fone, "
+                + " fone2, "
+                + " email, "
+                + " cep, "
+                + " logradouro, "
+                + " bairro, "
+                + " cidade, "
+                + " complemento, "
+                + " DATE_FORMAT(data_cadastro, '%d/%m/%Y') AS data_cadastro, "
+                + " cpf, "
+                + " rg, "
+                + " obs, "
+                + " status, "
+                + " razao_social, "
+                + " cnpj, "
+                + " inscricao_estadual, "
+                + " contato "
+                + "FROM fornecedor WHERE " + atributo + " LIKE ?";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rst = null;
+        List<Fornecedor> ListaFornecedors = new ArrayList<>();
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, "%" + valor + "%");
+            rst = pstm.executeQuery();
+
+            while (rst.next()) {
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setId(rst.getInt("id"));
+                fornecedor.setNome(rst.getString("nome"));
+                fornecedor.setFone1(rst.getString("fone"));
+                fornecedor.setFone2(rst.getString("fone2"));
+                fornecedor.setEmail(rst.getString("email"));
+                fornecedor.setCep(rst.getString("cep"));
+                fornecedor.setLogradouro(rst.getString("logradouro"));
+                fornecedor.setBairro(rst.getString("bairro"));
+                fornecedor.setCidade(rst.getString("cidade"));
+                fornecedor.setComplemento(rst.getString("complemento"));
+                fornecedor.setDataCadastro(rst.getString("data_cadastro"));
+                fornecedor.setCpf(rst.getString("cpf"));
+                fornecedor.setRg(rst.getString("rg"));
+                fornecedor.setObs(rst.getString("obs"));
+                fornecedor.setRazaoSocial(rst.getString("razao_social"));
+                fornecedor.setCnpj(rst.getString("cnpj"));
+                fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));
+                fornecedor.setContato(rst.getString("contato"));
+                fornecedor.setStatus(rst.getString("status").charAt(0));
+
+                ListaFornecedors.add(fornecedor);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
+
+        return ListaFornecedors;
+    }
+
+    @Override
+    public void Update(Fornecedor objeto) {
+
+        String sqlInstrucao = "UPDATE fornecedor SET "
+                + " nome = ?, "
+                + " fone = ?, "
+                + " fone2 = ?, "
+                + " email = ?, "
+                + " cep = ?, "
+                + " logradouro = ?, "
+                + " bairro = ?, "
+                + " cidade = ?, "
+                + " complemento = ?, "
+                + " data_cadastro = str_to_date(?, '%d/%m/%Y'), "
+                + " cpf = ?, "
+                + " rg = ?, "
+                + " obs = ?, "
+                + " status = ?, "
+                + " razao_social = ?, "
+                + " cnpj = ?, "
+                + " inscricao_estadual = ?, "
+                + " contato = ? "
+                + " WHERE id = ? ";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, objeto.getNome());
+            pstm.setString(2, objeto.getFone1());
+            pstm.setString(3, objeto.getFone2());
+            pstm.setString(4, objeto.getEmail());
+            pstm.setString(5, objeto.getCep());
+            pstm.setString(6, objeto.getLogradouro());
+            pstm.setString(7, objeto.getBairro());
+            pstm.setString(8, objeto.getCidade());
+            pstm.setString(9, objeto.getComplemento());
+            pstm.setString(10, objeto.getDataCadastro());
+            pstm.setString(11, objeto.getCpf());
+            pstm.setString(12, objeto.getRg());
+            pstm.setString(13, objeto.getObs());
+            pstm.setString(14, String.valueOf(objeto.getStatus()));
+            pstm.setString(15, objeto.getRazaoSocial());
+            pstm.setString(16, objeto.getCnpj());
+            pstm.setString(17, objeto.getInscricaoEstadual());
+            pstm.setString(18, objeto.getContato());
+            pstm.setInt(19, objeto.getId());
+
+            pstm.execute();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
+    }
+
+    @Override
+    public void Delete(Fornecedor objeto) {
+        // Implementação opcional
+    }
+}
