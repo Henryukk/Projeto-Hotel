@@ -226,11 +226,7 @@
                               <Component id="jLabelStatus" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldDescricao" pref="288" max="32767" attributes="0"/>
-                              <Component id="jTextFieldObservacao" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jTextFieldDescricao" min="-2" pref="288" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -251,21 +247,12 @@
                       <Component id="jTextFieldDescricao" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextFieldStatus" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Component id="jLabelMarca" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextFieldObservacao" min="-2" pref="76" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jTextFieldStatus" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="jLabelMarca" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="jComboBoxMarca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="64" max="32767" attributes="0"/>
               </Group>
@@ -288,18 +275,11 @@
             <Property name="text" type="java.lang.String" value="Status"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelObservacao">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldID">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldStatus">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldDescricao">
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldObservacao">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelMarca">
           <Properties>
@@ -309,26 +289,7 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxMarca">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="18">
-                <StringItem index="0" value="Aston Martin"/>
-                <StringItem index="1" value="Audi"/>
-                <StringItem index="2" value="Bentley"/>
-                <StringItem index="3" value="BMW"/>
-                <StringItem index="4" value="BYD"/>
-                <StringItem index="5" value="CAOA Chery"/>
-                <StringItem index="6" value="Chevrolet"/>
-                <StringItem index="7" value="Citroen"/>
-                <StringItem index="8" value="Effa"/>
-                <StringItem index="9" value="Ferrari"/>
-                <StringItem index="10" value="Fever"/>
-                <StringItem index="11" value="Fiat"/>
-                <StringItem index="12" value="Ford"/>
-                <StringItem index="13" value="Foton"/>
-                <StringItem index="14" value="GAC"/>
-                <StringItem index="15" value="Geely"/>
-                <StringItem index="16" value="GWM"/>
-                <StringItem index="17" value=" "/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>

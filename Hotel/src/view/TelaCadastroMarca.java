@@ -72,14 +72,6 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
         this.jTextFieldID = jTextFieldID;
     }
 
-    public JTextField getjTextFieldObservacao() {
-        return jTextFieldObservacao;
-    }
-
-    public void setjTextFieldObservacao(JTextField jTextFieldObservacao) {
-        this.jTextFieldObservacao = jTextFieldObservacao;
-    }
-
     public JTextField getjTextFieldStatus() {
         return jTextFieldStatus;
     }
@@ -113,11 +105,9 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
         jLabelID = new javax.swing.JLabel();
         jLabelDescricao = new javax.swing.JLabel();
         jLabelStatus = new javax.swing.JLabel();
-        jLabelObservacao = new javax.swing.JLabel();
         jTextFieldID = new javax.swing.JTextField();
         jTextFieldStatus = new javax.swing.JTextField();
         jTextFieldDescricao = new javax.swing.JTextField();
-        jTextFieldObservacao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -234,8 +224,6 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
 
         jLabelStatus.setText("Status");
 
-        jLabelObservacao.setText("Observação");
-
         jTextFieldID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIDActionPerformed(evt);
@@ -252,12 +240,6 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
         jTextFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDescricaoActionPerformed(evt);
-            }
-        });
-
-        jTextFieldObservacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldObservacaoActionPerformed(evt);
             }
         });
 
@@ -279,10 +261,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                             .addComponent(jTextFieldID, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addComponent(jTextFieldStatus))
                         .addGap(125, 125, 125)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelObservacao)
-                            .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                            .addComponent(jTextFieldObservacao, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -299,14 +278,10 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                         .addGap(10, 10, 10)
                         .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelObservacao)
-                    .addComponent(jLabelStatus))
+                .addComponent(jLabelStatus)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -340,10 +315,6 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNovoActionPerformed
-
-    private void jTextFieldObservacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldObservacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldObservacaoActionPerformed
 
     private void jTextFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoActionPerformed
         // TODO add your handling code here:
@@ -424,14 +395,12 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelID;
-    private javax.swing.JLabel jLabelObservacao;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldID;
-    private javax.swing.JTextField jTextFieldObservacao;
     private javax.swing.JTextField jTextFieldStatus;
     // End of variables declaration//GEN-END:variables
 }
