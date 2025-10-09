@@ -138,7 +138,7 @@ public Modelo Retrieve(int id) {
 
         String sqlInstrucao = "UPDATE modelo SET "
                 + " descricao = ?, "
-                + " status = ? "
+                + " status = ?, "
                 + " marca_id = ?"
                 + " WHERE id = ? ";
 

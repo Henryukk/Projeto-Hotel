@@ -68,13 +68,13 @@ public class ControllerCadModelo implements ActionListener {
     modelo.setDescricao(this.telaCadastroModelo.getjTextFieldDescricao().getText());
     modelo.setStatus(this.telaCadastroModelo.getjTextFieldStatus().getText().trim().charAt(0));
 
-    // 🔹 Pega a marca selecionada
-    modelo.setMarca(
-        service.MarcaService.Carregar(
-            "descricao",
-            this.telaCadastroModelo.getjComboBoxMarca().getItemAt(itemSelect)
-        ).get(0) // ou .getFirst(), dependendo da versão do seu Java
-    );
+
+        modelo.setMarca(
+            service.MarcaService.Carregar(
+                "descricao",
+                this.telaCadastroModelo.getjComboBoxMarca().getItemAt(itemSelect)
+            ).get(0) 
+        );
 
     if (this.telaCadastroModelo.getjTextFieldID().getText().trim().equalsIgnoreCase("")) {
         modelo.setStatus('A');
@@ -84,7 +84,6 @@ public class ControllerCadModelo implements ActionListener {
         service.ModeloService.Atualizar(modelo);
     }
 
-    // 🔹 Limpa a combo e reseta a tela
     this.telaCadastroModelo.getjComboBoxMarca().removeAllItems();
     utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanel1(), true);
     utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanel2(), false);
@@ -106,21 +105,34 @@ public class ControllerCadModelo implements ActionListener {
             telaBuscasModelo.setVisible(true);
 
             if (codigo != 0) {
-                utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanel1(), false);
-                utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanel2(), true);
 
-                this.telaCadastroModelo.getjTextFieldID().setText(codigo + "");
-                this.telaCadastroModelo.getjTextFieldID().setEnabled(false);
+        utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanel1(), false);
+        utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanel2(), true);
 
-                Modelo modelo = new Modelo();
-                modelo = service.ModeloService.Carregar(codigo);
-                //COLOCAR TODOS OS ATRIBUTOS DA CLASSE CADASTRO HOSPEDE
-                
-                this.telaCadastroModelo.getjTextFieldID().setText(String.valueOf(modelo.getId()));
-                this.telaCadastroModelo.getjTextFieldDescricao().setText(modelo.getDescricao());
-                this.telaCadastroModelo.getjTextFieldStatus().setText(String.valueOf(modelo.getStatus()));
+        this.telaCadastroModelo.getjTextFieldID().setText(String.valueOf(codigo));
+        this.telaCadastroModelo.getjTextFieldID().setEnabled(false);
 
-                this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
+        Modelo modelo = service.ModeloService.Carregar(codigo);
+
+        // encher a combobox
+        this.telaCadastroModelo.getjComboBoxMarca().removeAllItems();
+        java.util.List<Marca> opcoesMarca = service.MarcaService.Carregar("descricao", "%%");
+        for (Marca m : opcoesMarca) {
+            this.telaCadastroModelo.getjComboBoxMarca().addItem(m.getDescricao());
+        }
+
+        String descricaoMarca = modelo.getMarca().getDescricao();
+        for (int i = 0; i < this.telaCadastroModelo.getjComboBoxMarca().getItemCount(); i++) {
+            if (descricaoMarca.equals(this.telaCadastroModelo.getjComboBoxMarca().getItemAt(i))) {
+                this.telaCadastroModelo.getjComboBoxMarca().setSelectedIndex(i);
+                break;
+            }
+        }
+
+    this.telaCadastroModelo.getjTextFieldDescricao().setText(modelo.getDescricao());
+    this.telaCadastroModelo.getjTextFieldStatus().setText(String.valueOf(modelo.getStatus()));
+    this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
+
             }
         //_____________________________________________________________________________________________________________
         
