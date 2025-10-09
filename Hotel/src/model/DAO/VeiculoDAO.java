@@ -102,20 +102,18 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
             rst = pstm.executeQuery();
 
             if (rst.next()) {
-                // Marca
+                
                 Marca marca = new Marca();
                 marca.setId(rst.getInt("marca_id"));
                 marca.setDescricao(rst.getString("marca_descricao"));
                 marca.setStatus(rst.getString("marca_status").charAt(0));
 
-                // Modelo
                 Modelo modelo = new Modelo();
                 modelo.setId(rst.getInt("modelo_id"));
                 modelo.setDescricao(rst.getString("modelo_descricao"));
                 modelo.setStatus(rst.getString("modelo_status").charAt(0));
                 modelo.setMarca(marca);
 
-                // Veículo (todos atributos do banco)
                 veiculo = new Veiculo();
                 veiculo.setId(rst.getInt("veiculo_id"));
                 veiculo.setPlaca(rst.getString("veiculo_placa"));
@@ -190,20 +188,18 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
             rst = pstm.executeQuery();
 
             while (rst.next()) {
-                // Marca
+                
                 Marca marca = new Marca();
                 marca.setId(rst.getInt("marca_id"));
                 marca.setDescricao(rst.getString("marca_descricao"));
                 marca.setStatus(rst.getString("marca_status").charAt(0));
 
-                // Modelo
                 Modelo modelo = new Modelo();
                 modelo.setId(rst.getInt("modelo_id"));
                 modelo.setDescricao(rst.getString("modelo_descricao"));
                 modelo.setStatus(rst.getString("modelo_status").charAt(0));
                 modelo.setMarca(marca);
 
-                // Veículo
                 Veiculo veiculo = new Veiculo();
                 veiculo.setId(rst.getInt("veiculo_id"));
                 veiculo.setPlaca(rst.getString("veiculo_placa"));
