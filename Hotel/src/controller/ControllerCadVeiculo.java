@@ -60,15 +60,15 @@ public class ControllerCadVeiculo implements ActionListener {
             this.telaCadastroVeiculo.getjTextFieldMarca().setText("");
 
             // Foco
-            this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().requestFocus();
+            this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
 
         //_____________________________________________________________________________________________________________
             
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonGravar()) {
             
-            if (this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().getText().trim().isEmpty()) {
+            if (this.telaCadastroVeiculo.getjTextFieldPlaca().getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "O campo Placa é obrigatório.");
-                this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().requestFocus();
+                this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
                 return;
             }
             if (this.telaCadastroVeiculo.getjComboBoxModelo().getSelectedIndex() == -1) {
@@ -78,7 +78,7 @@ public class ControllerCadVeiculo implements ActionListener {
             }
 
             Veiculo veiculo = new Veiculo();
-            veiculo.setPlaca(this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().getText());
+            veiculo.setPlaca(this.telaCadastroVeiculo.getjTextFieldPlaca().getText());
             veiculo.setCor(this.telaCadastroVeiculo.getjComboBoxCorDoVeiculo().getSelectedItem().toString());
 
             String st = this.telaCadastroVeiculo.getjTextFieldStatus().getText().trim();
@@ -135,7 +135,7 @@ public class ControllerCadVeiculo implements ActionListener {
             
                 Veiculo veiculo = service.VeiculoService.Carregar(codigo);
 
-                this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().setText(veiculo.getPlaca());
+                this.telaCadastroVeiculo.getjTextFieldPlaca().setText(veiculo.getPlaca());
                 selecionarCor(veiculo.getCor());
                 this.telaCadastroVeiculo.getjTextFieldStatus().setText(String.valueOf(veiculo.getStatus()));
 
@@ -154,7 +154,7 @@ public class ControllerCadVeiculo implements ActionListener {
                                 : ""
                 );
 
-                this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().requestFocus();
+                this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             }
             
         //_____________________________________________________________________________________________________________

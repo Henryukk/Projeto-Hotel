@@ -41,7 +41,7 @@ public class ControllerCadFuncionario implements ActionListener {
             
             
             java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);

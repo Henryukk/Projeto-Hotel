@@ -40,12 +40,12 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
 
 public Modelo Retrieve(int id) {
     String sqlInstrucao = "SELECT "
-            + " modelo.id as modelo_id, "
-            + " modelo.descricao as modelo_descricao, "
-            + " modelo.status as modelo_status, "
-            + " marca.id as marca_id, "
-            + " marca.descricao as marca_descricao, "
-            + " marca.status as marca_status "
+            + " modelo.id            AS modelo_id, "
+            + " modelo.descricao     AS modelo_descricao, "
+            + " modelo.status        AS modelo_status, "
+            + " marca.id             AS marca_id, "
+            + " marca.descricao      AS marca_descricao, "
+            + " marca.status         AS marca_status "
             + " FROM modelo "
             + " INNER JOIN marca ON modelo.marca_id = marca.id "
             + " WHERE modelo.id = ?";

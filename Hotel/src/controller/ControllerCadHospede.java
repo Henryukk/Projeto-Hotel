@@ -41,7 +41,7 @@ public class ControllerCadHospede implements ActionListener {
             
             
             java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);
