@@ -14,14 +14,18 @@ public class CheckHospede {
     private String tipoHospede;
     private String obs;
     private String status;
+    private Check check;
+    private Hospede hospede;
 
     public CheckHospede() {
     }
 
-    public CheckHospede(int id, String tipoHospede, String obs, String status) {
+    public CheckHospede(int id, String tipoHospede, String obs, String status, Hospede hospede, Check check) {
         this.id = id;
         this.tipoHospede = tipoHospede;
         this.obs = obs;
+        this.check= check;
+        this.hospede= hospede;
         this.status = status;
     }
 
@@ -56,6 +60,23 @@ public class CheckHospede {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Check getCheck() {
+        return check;
+    }
+
+    public void setCheck(Check check) {
+        this.check = check;
+    }
+
+    public Hospede getHospede() {
+        return hospede;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
+    
 
     @Override
     public String toString() {

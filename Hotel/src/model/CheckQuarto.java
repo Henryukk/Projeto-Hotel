@@ -15,15 +15,19 @@ public class CheckQuarto {
     private String dataHoraFim;
     private String obs;
     private char status;
+    private Check check;
+    private Quarto quarto;
 
     public CheckQuarto() {
     }
 
-    public CheckQuarto(int id, String dataHoraInicio, String dataHoraFim, String obs, char status) {
+    public CheckQuarto(int id, String dataHoraInicio, String dataHoraFim, String obs, char status, Check check, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.obs = obs;
+        this.check = check;
+        this.quarto = quarto;
         this.status = status;
     }
 
@@ -66,6 +70,23 @@ public class CheckQuarto {
     public void setStatus(char status) {
         this.status = status;
     }
+
+    public Check getCheck() {
+        return check;
+    }
+
+    public void setCheck(Check check) {
+        this.check = check;
+    }
+
+    public Quarto getQuarto() {
+        return quarto;
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
+    }
+    
 
     @Override
     public String toString() {

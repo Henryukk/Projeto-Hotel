@@ -15,15 +15,18 @@ public class Check {
     private String dataHoraEntrada;
     private String dataHoraSaida;
     private String obs;
+    private char status;
+    private CheckQuarto checkQuarto;
 
     public Check() {
     }
 
-    public Check(int id, String dataHoraCadastro, String dataHoraEntrada, String dataHoraSaida, String obs) {
+    public Check(int id, String dataHoraCadastro,CheckQuarto checkQuarto, String dataHoraEntrada, String dataHoraSaida, String obs) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
         this.dataHoraEntrada = dataHoraEntrada;
         this.dataHoraSaida = dataHoraSaida;
+        this.checkQuarto = checkQuarto;
         this.obs = obs;
     }
 
@@ -67,6 +70,24 @@ public class Check {
         this.obs = obs;
     }
 
+    public char getStatus() {
+        return status;
+    }
+
+    public void setStatus(char status) {
+        this.status = status;
+    }
+
+    public CheckQuarto getCheckQuarto() {
+        return checkQuarto;
+    }
+
+    public void setCheckQuarto(CheckQuarto checkQuarto) {
+        this.checkQuarto = checkQuarto;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "id = " + id + 
@@ -74,6 +95,10 @@ public class Check {
                 "\ndataHoraEntrada = " + dataHoraEntrada + 
                 "\ndataHoraSaida = " + dataHoraSaida + 
                 "\nobs = " + obs;
+    }
+
+    public int getCheckQuartoId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

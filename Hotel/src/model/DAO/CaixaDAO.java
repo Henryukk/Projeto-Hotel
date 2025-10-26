@@ -9,21 +9,22 @@ import model.Caixa;
 
 public class CaixaDAO implements InterfaceDAO<Caixa>{
 
+    @Override
     public void Create(Caixa objeto) {
 
-        String sqlInstrucao = "Insert into caixa("
-                + " valor_de_abertura,"
-                + " valor_de_fechamento,"
-                + " data_hora_abertura,"
-                + " data_hora_fechamento,"
-                + " obs, "
-                + " status) "
-                + " values (?,?)";
+        String sqlInstrucao = "INSERT INTO caixa ("
+                + "valor_de_abertura, "
+                + "valor_de_fechamento, "
+                + "data_hora_abertura, "
+                + "data_hora_fechamento, "
+                + "obs, "
+                + "status) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
-        try {
 
+        try {
             pstm = conexao.prepareStatement(sqlInstrucao);
 
             pstm.setFloat(1, objeto.getValorDeAbertura());
@@ -31,9 +32,9 @@ public class CaixaDAO implements InterfaceDAO<Caixa>{
             pstm.setString(3, objeto.getDataHoraAbertura());
             pstm.setString(4, objeto.getDataHoraFechamento());
             pstm.setString(5, objeto.getObs());
-            pstm.setString(2, String.valueOf(objeto.getStatus()));
+            pstm.setString(6, String.valueOf(objeto.getStatus()));
 
-            pstm.execute();
+            pstm.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -43,40 +44,43 @@ public class CaixaDAO implements InterfaceDAO<Caixa>{
     }
 
     @Override
-     public Caixa Retrieve(int id) {
-        String sqlInstrucao = "SELECT "
-                + " id, "
-                + " valor_de_abertura,"
-                + " valor_de_fechamento,"
-                + " data_hora_abertura,"
-                + " data_hora_fechamento,"
-                + " obs, "
-                + " status "
-                + " FROM caixa WHERE id = ?";
+    public Caixa Retrieve(int id) {
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        String sqlInstrucao = "SELECT "
+                + "id, "
+                + "valor_de_abertura, "
+                + "valor_de_fechamento, "
+                + "data_hora_abertura, "
+                + "data_hora_fechamento, "
+                + "obs, "
+                + "status "
+                + "FROM caixa WHERE id = ?";
+
+        Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
-        Caixa caixa = new Caixa();
+        Caixa caixa = null;
 
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             rst = pstm.executeQuery();
 
-            while (rst.next()) {
+            if (rst.next()) {
+                caixa = new Caixa();
                 caixa.setId(rst.getInt("id"));
                 caixa.setValorDeAbertura(rst.getFloat("valor_de_abertura"));
                 caixa.setValorDeFechamento(rst.getFloat("valor_de_fechamento"));
                 caixa.setDataHoraAbertura(rst.getString("data_hora_abertura"));
-                
+                caixa.setDataHoraFechamento(rst.getString("data_hora_fechamento"));
+                caixa.setObs(rst.getString("obs"));
                 caixa.setStatus(rst.getString("status").charAt(0));
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            ConnectionFactory.closeConnection(conexao, pstm, rst);
         }
 
         return caixa;
@@ -86,15 +90,19 @@ public class CaixaDAO implements InterfaceDAO<Caixa>{
     public List<Caixa> Retrieve(String atributo, String valor) {
 
         String sqlInstrucao = "SELECT "
-                + " id,"
-                + " descricao,"
-                + " status "
+                + "id, "
+                + "valor_de_abertura, "
+                + "valor_de_fechamento, "
+                + "data_hora_abertura, "
+                + "data_hora_fechamento, "
+                + "obs, "
+                + "status "
                 + "FROM caixa WHERE " + atributo + " LIKE ?";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
-        List<Caixa> ListaCaixas = new ArrayList<>();
+        List<Caixa> listaCaixas = new ArrayList<>();
 
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
@@ -104,38 +112,51 @@ public class CaixaDAO implements InterfaceDAO<Caixa>{
             while (rst.next()) {
                 Caixa caixa = new Caixa();
                 caixa.setId(rst.getInt("id"));
+                caixa.setValorDeAbertura(rst.getFloat("valor_de_abertura"));
+                caixa.setValorDeFechamento(rst.getFloat("valor_de_fechamento"));
+                caixa.setDataHoraAbertura(rst.getString("data_hora_abertura"));
+                caixa.setDataHoraFechamento(rst.getString("data_hora_fechamento"));
+                caixa.setObs(rst.getString("obs"));
                 caixa.setStatus(rst.getString("status").charAt(0));
-                
-
-                ListaCaixas.add(caixa);
+                listaCaixas.add(caixa);
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            ConnectionFactory.closeConnection(conexao, pstm, rst);
         }
 
-        return ListaCaixas;
+        return listaCaixas;
     }
 
     @Override
     public void Update(Caixa objeto) {
 
         String sqlInstrucao = "UPDATE caixa SET "
-                + " descricao = ?, "
-                + " status = ? "
-                + " WHERE id = ? ";
+                + "valor_de_abertura = ?, "
+                + "valor_de_fechamento = ?, "
+                + "data_hora_abertura = ?, "
+                + "data_hora_fechamento = ?, "
+                + "obs = ?, "
+                + "status = ? "
+                + "WHERE id = ?";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
 
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(2, String.valueOf(objeto.getStatus()));
-            pstm.setInt(3, objeto.getId());
 
-            pstm.execute();
+            pstm.setFloat(1, objeto.getValorDeAbertura());
+            pstm.setFloat(2, objeto.getValorDeFechamento());
+            pstm.setString(3, objeto.getDataHoraAbertura());
+            pstm.setString(4, objeto.getDataHoraFechamento());
+            pstm.setString(5, objeto.getObs());
+            pstm.setString(6, String.valueOf(objeto.getStatus()));
+            pstm.setInt(7, objeto.getId());
+
+            pstm.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -146,6 +167,21 @@ public class CaixaDAO implements InterfaceDAO<Caixa>{
 
     @Override
     public void Delete(Caixa objeto) {
-        // Implementação opcional
+        
+        String sqlInstrucao = "UPDATE caixa SET status = ? WHERE id = ?";
+
+        Connection conexao = ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, "I");
+            pstm.setInt(2, objeto.getId());
+            pstm.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
     }
 }
